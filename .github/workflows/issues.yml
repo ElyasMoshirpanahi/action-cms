@@ -1,0 +1,11 @@
+name: issues pipeline
+
+on: [issues]
+
+jobs:
+    submit-issue:
+        runs-on: ubuntu-latest
+        steps:
+            - name: show error
+              run : echo "${{ github.event.issue }}" 
+             
