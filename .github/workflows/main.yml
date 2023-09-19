@@ -3,7 +3,7 @@ name: CI/CD pipeline
 on: [push,workflow_dispatch]
 
 jobs:
-    test:
+    all-in-one:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout 
@@ -14,33 +14,9 @@ jobs:
                         
             - name: run test
               run:  npm run test
-    lint:
-        needs: [test]
-        name : running test and lint 
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout 
-              uses: actions/checkout@v3
-
-            - name: install node
-              run : npm ci
 
             - name: run linter
               run:  npm run lint
-
-
-    deploy:
-        needs: [lint,test]
-        runs-on: ubuntu-latest
-        steps:
-            - name : Building and deploying to server
-              run:   echo "All jobs are successfull , deploying to the server now"
-            
-            - name: Checkout 
-              uses: actions/checkout@v3
-              
-            - name: install node
-              run : npm ci
 
             - name: run build
               run:  npm run build
